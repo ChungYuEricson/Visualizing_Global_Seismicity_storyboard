@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>template_2</title>
+<title>Visualizing Global Seismicity</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -159,11 +159,11 @@ window.Quarto = {
       <style>
         :root {
           --cr-narrative-background-color-sidebar: #FFFFFF;
---cr-narrative-background-color-overlay: #FFFFFF;
---cr-narrative-text-color-sidebar: #000000;
---cr-section-background-color: #FFFFFF;
---cr-narrative-text-color-overlay: #000000;
 --cr-narrative-font-size: 26px;
+--cr-section-background-color: #FFFFFF;
+--cr-narrative-text-color-sidebar: #000000;
+--cr-narrative-background-color-overlay: #FFFFFF;
+--cr-narrative-text-color-overlay: #000000;
         }
       </style>
     
@@ -525,37 +525,37 @@ window.Quarto = {
 <p>Our data is only as complete as the sensors capturing it. We expose the structural differences between localized, high-density regional networks like Northern California (nc) or Southern California (ci), which prioritize finding every single micro-quake to map local fault lines, and the sweeping global us network, which skips the noise to focus strictly on widespread, macro-level global hazards.</p>
 <div class="cr-section cr-column-screen sidebar-left">
 <div class="narrative-col">
-<div class="trigger new-trigger" data-scale-by="1.5" data-focus-on="cr-plot1" data-pan-to="0%,0%">
+<div class="trigger new-trigger" data-pan-to="0%,0%" data-scale-by="1.5" data-focus-on="cr-plot1">
 <div class="narrative">
 <p>When looking at a raw data of global seismicity, earthquakes can appear to be scattered almost at random across the globe. But if we plot the data and visualize it, a strict geographic blueprint emerges.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-scale-by="1.5" data-focus-on="cr-plot1" data-pan-to="0%,0%">
+<div class="trigger new-trigger" data-pan-to="0%,0%" data-scale-by="1.5" data-focus-on="cr-plot1">
 <div class="narrative">
 <p>It becomes obvious that earthquake frequency and geolocation have a massive relationship. Instead of popping up just anywhere, tremors follow narrow, super-active corridors, leaving huge chunks of major continents completely silent.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-scale-by="2.4" data-focus-on="cr-plot1" data-pan-to="45%,15%">
+<div class="trigger new-trigger" data-pan-to="45%,15%" data-scale-by="2.4" data-focus-on="cr-plot1">
 <div class="narrative">
 <p>Let’s first zoom in along the high-frequency boundaries tracking the Americas. Notice the massive, tightly packed strip of shallow events cutting right through the West Coast of North America and plunging down the South American trench line.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-scale-by="2.2" data-focus-on="cr-plot1" data-pan-to="-35%,10%">
+<div class="trigger new-trigger" data-pan-to="-35%,10%" data-scale-by="2.2" data-focus-on="cr-plot1">
 <div class="narrative">
 <p>Next, we pan directly across the Pacific Basin over to the Philippines and its surrounding oceanic trenches (tracking from Longitude 100 to 180). Here, the map lights up with deep mantle ruptures, marking where oceanic plates actively subduct into the deep Earth.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-scale-by="1.5" data-focus-on="cr-plot1" data-pan-to="0%,0%">
+<div class="trigger new-trigger" data-pan-to="0%,0%" data-scale-by="1.5" data-focus-on="cr-plot1">
 <div class="narrative">
 <p>Finally, those lighter earthquakes happen constantly, but they aren’t nearly as destructive. To really answer where the critical seismic hazard clusters, we need to focus exclusively on the major threats.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-scale-by="1.5" data-focus-on="cr-plot1" data-pan-to="0%,0%">
+<div class="trigger new-trigger" data-pan-to="0%,0%" data-scale-by="1.5" data-focus-on="cr-plot1">
 <div class="narrative">
 <p>As we filter out everything below a Magnitude 6, it leaves a few massive hazards isolated almost entirely along the western Pacific margins near the Philippines, Japan, and the coast of the Americas.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-scale-by="1.5" data-focus-on="cr-plot1" data-pan-to="0%,0%">
+<div class="trigger new-trigger" data-pan-to="0%,0%" data-scale-by="1.5" data-focus-on="cr-plot1">
 <div class="narrative">
 <p>Looking at these isolated hotspots, a natural question comes up: why are these specific areas so uniquely hazardous? Is it just their raw geolocation on the map, or does the depth of the rupture play a hidden role in making them so destructive? To find out, we have to look below the surface and analyze how depth behaves across these high-risk zones.</p>
 </div>
@@ -609,7 +609,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>So we could only tell that earthquakes with high magnitude is likely <strong>Shallow</strong> or <strong>Intermediate</strong> in depth. Maybe need to check other attributes to find stronger correlations.</p>
+<p>So we could only tell that earthquakes with high magnitude is likely <strong>Shallow</strong> or <strong>Intermediate</strong> in depth. Maybe we need to check other attributes to find stronger correlations.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 13%">

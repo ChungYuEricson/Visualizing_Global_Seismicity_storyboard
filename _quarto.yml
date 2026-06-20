@@ -5,7 +5,7 @@ project:
     - charts/
 
 website:
-  title: "template_2"
+  title: "Visualizing Global Seismicity"
 
 format:
   html:
