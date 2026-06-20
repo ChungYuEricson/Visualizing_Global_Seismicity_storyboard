@@ -1,0 +1,227 @@
+---
+title: ""
+format:
+  closeread-html:
+    cr-style:
+      section-background-color: "#FFFFFF"
+      narrative-background-color-sidebar: "#FFFFFF"
+      narrative-text-color-sidebar: "#000000"
+      narrative-background-color-overlay: "#FFFFFF"
+      narrative-text-color-overlay: "#000000"
+      narrative-font-size: 26px
+---
+
+```{ojs}
+//| echo: false
+//| output: false
+
+spec1 = FileAttachment("charts/view1.json").json()
+spec2 = FileAttachment("charts/view2.json").json()
+spec3 = FileAttachment("charts/view3.json").json()
+spec4 = FileAttachment("charts/view4.json").json()
+
+vegaEmbed = require("vega-embed@6.24.0")
+
+chart1 = {
+  let el;
+  while (!(el = document.querySelector("#chart1"))) {
+    await new Promise(r => setTimeout(r, 100));
+  }
+  el.innerHTML = "";
+  const result = await vegaEmbed(el, spec1, { renderer: "svg", actions: false });
+  return result.view;
+}
+
+chart2 = {
+  let el;
+  while (!(el = document.querySelector("#chart2"))) {
+    await new Promise(r => setTimeout(r, 100));
+  }
+  el.innerHTML = "";
+  const result = await vegaEmbed(el, spec2, { renderer: "svg", actions: false });
+  return result.view;
+}
+
+chart3 = {
+  let el;
+  while (!(el = document.querySelector("#chart3"))) {
+    await new Promise(r => setTimeout(r, 100));
+  }
+  el.innerHTML = "";
+  const result = await vegaEmbed(el, spec3, { renderer: "svg", actions: false });
+  return result.view;
+}
+
+chart4 = {
+  let el;
+  while (!(el = document.querySelector("#chart4"))) {
+    await new Promise(r => setTimeout(r, 100));
+  }
+  el.innerHTML = "";
+  const result = await vegaEmbed(el, spec4, { renderer: "svg", actions: false });
+  return result.view;
+}
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+
+updateChartSignals = {
+  const step = crTriggerIndex;
+  if (chart1 && typeof chart1.signal === 'function') {
+    if (step === 5 || step === 6) {
+      await chart1.signal("min_mag", 6.0).runAsync();
+    } else {
+      await chart1.signal("min_mag", 0).runAsync();
+    }
+  }
+
+  if (chart2 && typeof chart2.signal === 'function') {
+    if (step === 9) {
+      await chart2.signal("depth_ordinal_category", ["Deep (>300 km)"]).runAsync();
+    } else if (step === 10) {
+      // Highlight both Shallow and Intermediate together
+      await chart2.signal("depth_ordinal_category", ["Shallow (0-70 km)", "Intermediate (70-300 km)"]).runAsync();
+    } else if (step >= 7) {
+      await chart2.signal("depth_ordinal_category", []).runAsync();
+    }
+  }
+}
+```
+
+
+# **Visualizing Global Seismicity:** An Interactive Analysis of Tectonic Patterns
+## Introduction
+Every day, the Earth’s crust cracks, shifts, and vibrates, sending thousands of seismic signals pulsing through the globe. But what we actually see on an earthquake dashboard is not a raw, objective feed of planetary activity, it is a carefully filtered picture shaped by tectonic architecture and human engineering.
+
+This project explores a month of global seismic data from the U.S. Geological Survey (USGS) to uncover the hidden relationships between an earthquake's physical dimensions, its geographic destructive potential, and the institutional lenses through which we observe them. By transitioning from static charts to an interactive scrollytelling experience, this analysis allows us to peel back the layers of seismic monitoring and see how data science maps the pulse of our planet.
+
+## The Dataset
+
+This analysis utilizes a comprehensive, global seismic archive provided by the U.S. Geological Survey (USGS), capturing all recorded seismic events over a 30-day window. The data serves as a real-time ledger of the planet's shifting crust, documenting everything from micro-tremors triggered by local faults to catastrophic, high-magnitude rumbles along major plate boundaries.
+
+While the raw data logs extensive telemetry for network quality control, this story filters out the technical noise to isolate a few critical attributes that directly dictate environmental hazard and institutional visibility:
+
+#### Spatial & Core Structural Attributes
+**latitude & longitude:** These spatial coordinates form the baseline of our geographic analysis. They allow us to map the precise epicenters of seismic activity, drawing clear boundaries between silent continental interiors and high-activity zones like the Mid-Atlantic Ridge and the Pacific Rim.
+
+**mag (Magnitude)**: The fundamental measurement of energy released at the earthquake's source. This attribute acts as our primary metric for sorting harmless planetary background noise from severe, high-stakes natural disasters.
+
+**depth:** The vertical coordinate tracking how far below the Earth's surface (in kilometers) the rupture occurred. Depth is crucial for understanding subterranean pressure mechanics and predicting whether a fault rupture can efficiently transfer destructive energy up to the surface.
+
+#### Engineered & Institutional Attributes
+**net / locationSource (Network Code):** The identifier for the specific seismic network that detected and processed the event. This attribute is the key to uncovering institutional bias, allowing us to contrast data from highly localized, high-resolution regional operations with expansive, global observation networks.
+
+## Dataset Information
+
+**Dataset:** USGS Earthquake Data (All Earthquakes, Past Month)  
+**Source:** U.S. Geological Survey (USGS)  
+**URL:** [https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv](https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv)  
+**License:** U.S. Public Domain  
+**Date Accessed:** October 23, 2025  
+**Time Period:** Past 30 days
+
+| Attribute Name | Attribute Type | Data Semantics | Cardinality |
+| :--- | :--- | :--- | :---: |
+| **time** | Quantitative (Sequential, Temporal) | Timestamp of earthquake occurrence in ISO 8601 format | 6,281 |
+| **latitude** | Quantitative (Sequential) | Spatial coordinate (°), range: ~–65.6 to 85.1 | 5,074 |
+| **longitude** | Quantitative (Sequential) | Spatial coordinate (°), range: ~–179.9 to 179.9 | 5,265 |
+| **depth** | Quantitative (Sequential) | Depth below Earth’s surface (km), range: approx –3.2 to 643.1 | 3,330 |
+| **mag** | Quantitative (Sequential) | Earthquake magnitude on a standard scale, range: approx –2.1 to 7.6 | 492 |
+| **magType** | Categorical (Nominal) | Type of magnitude calculation | 7 |
+| **nst** | Quantitative (Sequential) | Number of seismic stations that recorded the event | 146 |
+| **gap** | Quantitative (Sequential) | Largest azimuthal gap between adjacent stations (°) | 319 |
+| **dmin** | Quantitative (Sequential) | Horizontal distance from epicenter to nearest station (°) | 4,440 |
+| **rms** | Quantitative (Sequential) | Root-mean-square travel time residual (s) | 159 |
+| **net** | Categorical (Nominal) | Network code of contributing organization | 12 |
+| **id** | Categorical (Nominal) | Unique identifier for each earthquake event | 6,281 |
+| **updated** | Quantitative (Sequential, Temporal) | Timestamp of last data update (ISO 8601) | 6,281 |
+| **place** | Categorical (Nominal) | Human-readable text description of location | 3,334 |
+| **type** | Categorical (Nominal) | Type of seismic event (e.g., earthquake, quarry blast, explosion) | 3 |
+| **horizontalError** | Quantitative (Sequential) | Uncertainty estimate of horizontal position (km) | 1,885 |
+| **depthError** | Quantitative (Sequential) | Uncertainty estimate of depth (km) | 2,415 |
+| **magError** | Quantitative (Sequential) | Uncertainty estimate of magnitude | 2,165 |
+| **magNst** | Quantitative (Sequential) | Number of stations used to calculate magnitude | 208 |
+| **status** | Categorical (Ordinal) | Review status: automatic < reviewed | 2 |
+| **locationSource** | Categorical (Nominal) | Network code for original location determined | 12 |
+| **magSource** | Categorical (Nominal) | Network code for original magnitude determined | 12 |
+| **mag_ordinal** | Categorical (Ordinal) | Categorized magnitude (Minor to Major) | 5 |
+| **depth_ordinal** | Categorical (Ordinal) | Categorized depth levels | 4 |
+| **gap_level** | Categorical (Ordinal) | Binned azimuthal gap level | 4 |
+## Impact and Utility
+
+The purpose of this analysis is to help data scientists, emergency planners, and climate communicators look past raw earthquake counts and understand the underlying physics and structural biases inherent in geospatial hazard data.To guide our journey through the data, this story addresses three critical questions:
+
+### Where does the critical seismic hazard cluster?
+
+While thousands of minor rumbles happen daily along mid-ocean ridges, the truly devastating, high-magnitude hazards do not spread evenly. We track how severe, high-impact events ($M \ge 6.0$) pack tightly along the high-stakes tectonic boundaries of the Pacific Margin—the infamous "Ring of Fire"—leaving continental plates and ocean rifts comparatively quiet.
+
+### How does an earthquake's depth dictate its potential magnitude?
+
+The subterranean mechanics of a rupture constrain its power. By examining the interplay between depth and energy release, we explore a fascinating physical boundary: why deep-earth fractures compress tightly into a predictable, moderate range ($M \approx 4.5$), whereas shallow, brittle crustal faults span the entire energy spectrum, holding the exclusive monopoly on catastrophic surface destruction.
+
+### How do network priorities bias what we see?
+
+Our data is only as complete as the sensors capturing it. We expose the structural differences between localized, high-density regional networks like Northern California (nc) or Southern California (ci), which prioritize finding every single micro-quake to map local fault lines, and the sweeping global us network, which skips the noise to focus strictly on widespread, macro-level global hazards.
+
+:::{.cr-section}
+
+When looking at a raw data of global seismicity, earthquakes can appear to be scattered almost at random across the globe. But if we plot the data and visualize it, a strict geographic blueprint emerges. [@cr-plot1]{scale-by="1.5" pan-to="0%,0%"}
+
+It becomes obvious that earthquake frequency and geolocation have a massive relationship. Instead of popping up just anywhere, tremors follow narrow, super-active corridors, leaving huge chunks of major continents completely silent. [@cr-plot1]{scale-by="1.5" pan-to="0%,0%"}
+
+Let's first zoom in along the high-frequency boundaries tracking the Americas. Notice the massive, tightly packed strip of shallow events cutting right through the West Coast of North America and plunging down the South American trench line. [@cr-plot1]{scale-by="2.4" pan-to="45%,15%"}
+
+Next, we pan directly across the Pacific Basin over to the Philippines and its surrounding oceanic trenches (tracking from Longitude 100 to 180). Here, the map lights up with deep mantle ruptures, marking where oceanic plates actively subduct into the deep Earth. [@cr-plot1]{scale-by="2.2" pan-to="-35%,10%"}
+
+Finally, those lighter earthquakes happen constantly, but they aren't nearly as destructive. To really answer where the critical seismic hazard clusters, we need to focus exclusively on the major threats. [@cr-plot1]{scale-by="1.5" pan-to="0%,0%"}
+
+As we filter out everything below a Magnitude 6, it leaves a few massive hazards isolated almost entirely along the western Pacific margins near the Philippines, Japan, and the coast of the Americas. [@cr-plot1]{scale-by="1.5" pan-to="0%,0%"}
+
+Looking at these isolated hotspots, a natural question comes up: why are these specific areas so uniquely hazardous? Is it just their raw geolocation on the map, or does the depth of the rupture play a hidden role in making them so destructive? To find out, we have to look below the surface and analyze how depth behaves across these high-risk zones. [@cr-plot1]{scale-by="1.5" pan-to="0%,0%"}
+
+:::{#cr-plot1}
+<div id="chart1"></div>
+:::
+:::
+
+:::{.cr-section}
+
+To understand why those specific map margins produce major disasters, we have to look at how different structural depths behave under stress. This density distribution separates earthquakes into distinct subterranean families. @cr-plot2
+
+Look closely at the color profiles on your right. By tracking these distinct curves, we can isolate how magnitude distributions warp depending on how deep a fracture occurs below the surface. @cr-plot2
+
+Notice how the **Deep** curves hit a strict mathematical wall near Magnitude 4.0; because small tremors at extreme depths lose their energy before reaching surface arrays, global networks can only detect them when they cross this threshold. @cr-plot2
+
+Once past this detection barrier, these deep events peak sharply between magnitudes 4 and 5.5, followed by a dramatic drop-off at magnitude 6.0. Beyond this point, the density curve plummets to near zero. This drop reflects a fundamental geophysical reality: while massive deep-focus earthquakes are technically possible under rare conditions, the intense heat and pressure of the mantle make the rock behave more like plastic than brittle glass, meaning earthquakes above magnitude 6.0 at these depths are exceptionally rare anomalies.
+
+In contrast, look at the **Shallow** and **Intermediate**  curve. This profile sweeps across the entire continuous energy spectrum. Because shallow rock is cold, stiff, and brittle, it builds up massive friction, holding the exclusive monopoly on the catastrophic Magnitude 7+ events capable of surface devastation. @cr-plot2
+
+:::{#cr-plot2}
+<div id="chart2"></div>
+:::
+:::
+
+So we could only tell that earthquakes with high magnitude is likely  **Shallow** or **Intermediate** in depth. Maybe we need to check other attributes to find stronger correlations.  
+
+| | mag | depth | gap | latitude | longitude |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **mag** | 1.000000 | 0.397189 | -0.056169 | -0.607594 | 0.733623 |
+| **depth** | 0.397189 | 1.000000 | 0.001089 | -0.413894 | 0.305163 |
+| **gap** | -0.056169 | 0.001089 | 1.000000 | 0.218426 | -0.036150 |
+| **latitude** | -0.607594 | -0.413894 | 0.218426 | 1.000000 | -0.348001 |
+| **longitude** | 0.733623 | 0.305163 | -0.036150 | -0.348001 | 1.000000 |
+
+The correlation analysis revealed that earthquake magnitude is strongly positively correlated with longitude (r = 0.734) and strongly negatively correlated with latitude (r = -0.608). These results suggest a potential relationship between earthquake magnitude and geographic location, warranting further spatial investigation.
+
+<div id="chart3"></div>
+
+While the correlation matrix suggests a strong relationship between magnitude and geographic coordinates ($r = 0.734$ for longitude; $r = -0.608$ for latitude), the scatter plots reveal this is a statistical illusion driven by network reporting bias rather than planetary physics. For longitude, a massive wall of micro-earthquakes stretching down to magnitudes of $0$ and $-1$ is recorded across North America (longitudes $-200$ to $-60$), whereas data in the Western Pacific (longitudes $100$ to $200$) abruptly clips and logs almost nothing below magnitude $4.0$. Because the dataset floods the calculation with tiny tremors in the West while strictly capturing macro-level hazards in the East, the linear formula gets tricked into seeing a false upward trend.A nearly identical sampling trap occurs with latitude. The strong negative correlation ($r = -0.608$) implies that earthquakes miraculously grow weaker as you move north, but the plot shows this is simply because high-density regional networks are heavily clustered in the Northern Hemisphere, specifically between $30^\circ\text{N}$ and $60^\circ\text{N}$ (covering California, Japan, and Alaska). 
+
+We could confirm this speculation by plotting the network sources and their geographic and attribute distribution.
+
+<div id="chart4"></div>
+
+## Conclusion
+Ultimately, this structural journey through global seismicity proves that data is never a purely objective mirror of reality; it is co-authored by the physical world and the instruments we use to measure it. While a raw statistical sweep falsely registers geographic trends in earthquake magnitudes, crossing our spatial data with structural attributes and network sources reveals the true narrative. Earthquakes follow the rigid, deep-earth boundaries of tectonic plate architecture, while our data boundaries are drawn by institutional priorities. Recognizing this boundary between planetary physics and human observation is what transforms raw geospatial telemetry into accurate, actionable insight for hazard mitigation and global data science.
