@@ -158,12 +158,12 @@ window.Quarto = {
       <!-- user-provided yaml closeread style options -->
       <style>
         :root {
-          --cr-narrative-background-color-sidebar: #FFFFFF;
---cr-narrative-font-size: 26px;
---cr-section-background-color: #FFFFFF;
---cr-narrative-text-color-sidebar: #000000;
+          --cr-narrative-font-size: 26px;
 --cr-narrative-background-color-overlay: #FFFFFF;
+--cr-section-background-color: #FFFFFF;
 --cr-narrative-text-color-overlay: #000000;
+--cr-narrative-background-color-sidebar: #FFFFFF;
+--cr-narrative-text-color-sidebar: #000000;
         }
       </style>
     
@@ -525,37 +525,37 @@ window.Quarto = {
 <p>Our data is only as complete as the sensors capturing it. We expose the structural differences between localized, high-density regional networks like Northern California (nc) or Southern California (ci), which prioritize finding every single micro-quake to map local fault lines, and the sweeping global us network, which skips the noise to focus strictly on widespread, macro-level global hazards.</p>
 <div class="cr-section cr-column-screen sidebar-left">
 <div class="narrative-col">
-<div class="trigger new-trigger" data-pan-to="0%,0%" data-scale-by="1.5" data-focus-on="cr-plot1">
+<div class="trigger new-trigger" data-scale-by="1.5" data-focus-on="cr-plot1" data-pan-to="0%,0%">
 <div class="narrative">
 <p>When looking at a raw data of global seismicity, earthquakes can appear to be scattered almost at random across the globe. But if we plot the data and visualize it, a strict geographic blueprint emerges.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-pan-to="0%,0%" data-scale-by="1.5" data-focus-on="cr-plot1">
+<div class="trigger new-trigger" data-scale-by="1.5" data-focus-on="cr-plot1" data-pan-to="0%,0%">
 <div class="narrative">
 <p>It becomes obvious that earthquake frequency and geolocation have a massive relationship. Instead of popping up just anywhere, tremors follow narrow, super-active corridors, leaving huge chunks of major continents completely silent.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-pan-to="45%,15%" data-scale-by="2.4" data-focus-on="cr-plot1">
+<div class="trigger new-trigger" data-scale-by="2.4" data-focus-on="cr-plot1" data-pan-to="45%,15%">
 <div class="narrative">
 <p>Let’s first zoom in along the high-frequency boundaries tracking the Americas. Notice the massive, tightly packed strip of shallow events cutting right through the West Coast of North America and plunging down the South American trench line.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-pan-to="-35%,10%" data-scale-by="2.2" data-focus-on="cr-plot1">
+<div class="trigger new-trigger" data-scale-by="2.2" data-focus-on="cr-plot1" data-pan-to="-35%,10%">
 <div class="narrative">
 <p>Next, we pan directly across the Pacific Basin over to the Philippines and its surrounding oceanic trenches (tracking from Longitude 100 to 180). Here, the map lights up with deep mantle ruptures, marking where oceanic plates actively subduct into the deep Earth.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-pan-to="0%,0%" data-scale-by="1.5" data-focus-on="cr-plot1">
+<div class="trigger new-trigger" data-scale-by="1.5" data-focus-on="cr-plot1" data-pan-to="0%,0%">
 <div class="narrative">
 <p>Finally, those lighter earthquakes happen constantly, but they aren’t nearly as destructive. To really answer where the critical seismic hazard clusters, we need to focus exclusively on the major threats.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-pan-to="0%,0%" data-scale-by="1.5" data-focus-on="cr-plot1">
+<div class="trigger new-trigger" data-scale-by="1.5" data-focus-on="cr-plot1" data-pan-to="0%,0%">
 <div class="narrative">
 <p>As we filter out everything below a Magnitude 6, it leaves a few massive hazards isolated almost entirely along the western Pacific margins near the Philippines, Japan, and the coast of the Americas.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-pan-to="0%,0%" data-scale-by="1.5" data-focus-on="cr-plot1">
+<div class="trigger new-trigger" data-scale-by="1.5" data-focus-on="cr-plot1" data-pan-to="0%,0%">
 <div class="narrative">
 <p>Looking at these isolated hotspots, a natural question comes up: why are these specific areas so uniquely hazardous? Is it just their raw geolocation on the map, or does the depth of the rupture play a hidden role in making them so destructive? To find out, we have to look below the surface and analyze how depth behaves across these high-risk zones.</p>
 </div>
@@ -686,6 +686,33 @@ window.Quarto = {
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>Ultimately, this structural journey through global seismicity proves that data is never a purely objective mirror of reality; it is co-authored by the physical world and the instruments we use to measure it. While a raw statistical sweep falsely registers geographic trends in earthquake magnitudes, crossing our spatial data with structural attributes and network sources reveals the true narrative. Earthquakes follow the rigid, deep-earth boundaries of tectonic plate architecture, while our data boundaries are drawn by institutional priorities. Recognizing this boundary between planetary physics and human observation is what transforms raw geospatial telemetry into accurate, actionable insight for hazard mitigation and global data science.</p>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<p>While this interactive analysis successfully uncovers tectonic patterns and institutional monitoring footprints, three key constraints must be considered when interpreting these findings:</p>
+<section id="severe-spatial-selection-and-reporting-bias" class="level3">
+<h3 class="anchored" data-anchor-id="severe-spatial-selection-and-reporting-bias">1. Severe Spatial Selection and Reporting Bias</h3>
+<p>The dataset suffers from a massive geographic imbalance in sensor density. High-density regional networks (such as California’s <code>nc</code> and <code>ci</code>) log micro-quakes down to negative magnitudes, whereas oceanic boundaries and developing regions rely primarily on global networks (<code>us</code>) that only log events above <span class="math inline">\(M \ge 4.0\)</span>. Consequently, global statistical aggregates reflect <strong>where sensors are dense</strong> rather than uniform planetary activity.</p>
+</section>
+<section id="narrow-temporal-window" class="level3">
+<h3 class="anchored" data-anchor-id="narrow-temporal-window">2. Narrow Temporal Window</h3>
+<p>A 30-day window is an infinitesimally small sample size in geological time. This snapshot completely misses rare, catastrophic high-magnitude events (<span class="math inline">\(M \ge 8.0\)</span>) that occur over decades or centuries. Furthermore, a single major earthquake during this specific month can flood the dataset with hundreds of local aftershocks, creating temporary spatial “hotspots” that distort long-term seismic baselines.</p>
+</section>
+<section id="linear-statistical-distortion-on-spatial-coordinates" class="level3">
+<h3 class="anchored" data-anchor-id="linear-statistical-distortion-on-spatial-coordinates">3. Linear Statistical Distortion on Spatial Coordinates</h3>
+<p>The correlation matrix heavily misinterprets the relationship between magnitude and geographic coordinates (<span class="math inline">\(r = 0.734\)</span> for longitude). Because Pearson correlation assumes linear relationships and uniform sampling, it falls into a statistical trap when applied to coordinate systems. Latitude and longitude are spatial vectors, not independent continuous variables, meaning traditional linear formulas mistake localized network clustering for global physical trends.</p>
+</section>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<ul>
+<li><strong>USGS Earthquake Hazards Program</strong>
+<ul>
+<li><strong>Dataset:</strong> Advanced National Seismic System (ANNEIC) Comprehensive Catalog</li>
+<li><strong>Description:</strong> Continuous global seismic trigger logs recording event locations (latitude, longitude), focal depth (km), reporting network origin, measurement methodologies (<code>magType</code>), and estimated geometric errors.</li>
+<li><strong>Access Link:</strong> <a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php">USGS Earthquake Catalog API</a></li>
+</ul></li>
+</ul>
 
 
 </section>

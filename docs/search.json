@@ -37,9 +37,9 @@
   {
     "objectID": "index.html#limitations",
     "href": "index.html#limitations",
-    "title": "Interactive Visualization Project",
+    "title": "Visualizing Global Seismicity: An Interactive Analysis of Tectonic Patterns",
     "section": "Limitations",
-    "text": "Limitations"
+    "text": "Limitations\nWhile this interactive analysis successfully uncovers tectonic patterns and institutional monitoring footprints, three key constraints must be considered when interpreting these findings:\n\n1. Severe Spatial Selection and Reporting Bias\nThe dataset suffers from a massive geographic imbalance in sensor density. High-density regional networks (such as California’s nc and ci) log micro-quakes down to negative magnitudes, whereas oceanic boundaries and developing regions rely primarily on global networks (us) that only log events above \\(M \\ge 4.0\\). Consequently, global statistical aggregates reflect where sensors are dense rather than uniform planetary activity.\n\n\n2. Narrow Temporal Window\nA 30-day window is an infinitesimally small sample size in geological time. This snapshot completely misses rare, catastrophic high-magnitude events (\\(M \\ge 8.0\\)) that occur over decades or centuries. Furthermore, a single major earthquake during this specific month can flood the dataset with hundreds of local aftershocks, creating temporary spatial “hotspots” that distort long-term seismic baselines.\n\n\n3. Linear Statistical Distortion on Spatial Coordinates\nThe correlation matrix heavily misinterprets the relationship between magnitude and geographic coordinates (\\(r = 0.734\\) for longitude). Because Pearson correlation assumes linear relationships and uniform sampling, it falls into a statistical trap when applied to coordinate systems. Latitude and longitude are spatial vectors, not independent continuous variables, meaning traditional linear formulas mistake localized network clustering for global physical trends."
   },
   {
     "objectID": "index.html#references",
@@ -61,5 +61,12 @@
     "title": "Visualizing Global Seismicity: An Interactive Analysis of Tectonic Patterns",
     "section": "Conclusion",
     "text": "Conclusion\nUltimately, this structural journey through global seismicity proves that data is never a purely objective mirror of reality; it is co-authored by the physical world and the instruments we use to measure it. While a raw statistical sweep falsely registers geographic trends in earthquake magnitudes, crossing our spatial data with structural attributes and network sources reveals the true narrative. Earthquakes follow the rigid, deep-earth boundaries of tectonic plate architecture, while our data boundaries are drawn by institutional priorities. Recognizing this boundary between planetary physics and human observation is what transforms raw geospatial telemetry into accurate, actionable insight for hazard mitigation and global data science."
+  },
+  {
+    "objectID": "index.html#reference",
+    "href": "index.html#reference",
+    "title": "Visualizing Global Seismicity: An Interactive Analysis of Tectonic Patterns",
+    "section": "Reference",
+    "text": "Reference\n\nUSGS Earthquake Hazards Program\n\nDataset: Advanced National Seismic System (ANNEIC) Comprehensive Catalog\nDescription: Continuous global seismic trigger logs recording event locations (latitude, longitude), focal depth (km), reporting network origin, measurement methodologies (magType), and estimated geometric errors.\nAccess Link: USGS Earthquake Catalog API"
   }
 ]
